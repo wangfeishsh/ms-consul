@@ -1,0 +1,31 @@
+server:
+  port: 8083
+
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    org.springframework.cloud.consul: DEBUG
+spring:
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+      host: localhost
+      port: 8500
+  application:
+    name: ms-consul
